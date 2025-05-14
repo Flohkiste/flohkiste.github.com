@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abi Planer</title>
+    <link rel="stylesheet" href="farben.css" />
+    <link rel="stylesheet" href="abi.css" />
+    <link rel="stylesheet" href="bottom-nav.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Abi Planer</h1>
+    </header>
+    <div class="scroller">
+      <div id="endnote">Note</div>
+      <div id="bloecke">Übersicht Blöcke</div>
+      <div id="block1">Block 1</div>
+      <div id="block2">Block 2</div>
+    </div>
+    <div id="bottom-nav-placeholder"></div>
+    <script>
+      fetch("bottom-nav.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("bottom-nav-placeholder").innerHTML = data;
+        });
+    </script>
+  </body>
+</html>
