@@ -7,13 +7,25 @@
     <link rel="stylesheet" href="../assets/css/farben.css" />
     <link rel="stylesheet" href="../assets/css/abi.css" />
     <link rel="stylesheet" href="../assets/css/bottom-nav.css" />
+    <link rel="stylesheet" href="../assets/css/avgCircle.css" />
   </head>
   <body>
-    <header>
-      <h1>Abi Planer</h1>
-    </header>
+    <div id="header-placeholder"></div>
     <div class="scroller">
-      <div id="endnote">Note</div>
+      <div id="avg-placeholder">Aktueller halbjahrsschnitt</div>
+      <script async>
+        fetch("../components/avgCircle.html")
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("avg-placeholder").innerHTML = data;
+          });
+
+        fetch("../components/header.html")
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("header-placeholder").innerHTML = data;
+          });
+      </script>
       <div id="bloecke">Übersicht Blöcke</div>
       <div id="block1">Block 1</div>
       <div id="block2">Block 2</div>
@@ -24,6 +36,13 @@
         .then((response) => response.text())
         .then((data) => {
           document.getElementById("bottom-nav-placeholder").innerHTML = data;
+
+          const currentUrl = new URL(window.location.href); // Aktuelle URL
+          const links = document.getElementsByClassName("link");
+          const params = new URLSearchParams(currentUrl.search);
+          const x = params.get("x"); // Holt den Wert des Parameters "hj"
+
+          links[x - 1].classList.add("active");
         });
     </script>
   </body>

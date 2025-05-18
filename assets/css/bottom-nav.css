@@ -38,12 +38,7 @@ header {
   color: var(--text);
 }
 
-#navbar a .outercircle {
-  width: 20px;
-  height: 20px;
-  border-radius: 20px;
-  border: 2px solid var(--text);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#navbar a img {
+  width: 25px;
+  height: 25px;
 }
