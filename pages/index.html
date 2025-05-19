@@ -10,40 +10,16 @@
     <link rel="stylesheet" href="../assets/css/avgCircle.css" />
   </head>
   <body>
-    <div id="header-placeholder"></div>
+    <header-component></header-component>
     <div class="scroller">
-      <div id="avg-placeholder">Aktueller halbjahrsschnitt</div>
-      <script async>
-        fetch("../components/avgCircle.html")
-          .then((response) => response.text())
-          .then((data) => {
-            document.getElementById("avg-placeholder").innerHTML = data;
-          });
-
-        fetch("../components/header.html")
-          .then((response) => response.text())
-          .then((data) => {
-            document.getElementById("header-placeholder").innerHTML = data;
-          });
-      </script>
+      <avg-circle></avg-circle>
       <div id="bloecke">Übersicht Blöcke</div>
       <div id="block1">Block 1</div>
       <div id="block2">Block 2</div>
     </div>
-    <div id="bottom-nav-placeholder"></div>
-    <script>
-      fetch("../components/bottom-nav.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("bottom-nav-placeholder").innerHTML = data;
-
-          const currentUrl = new URL(window.location.href); // Aktuelle URL
-          const links = document.getElementsByClassName("link");
-          const params = new URLSearchParams(currentUrl.search);
-          const x = params.get("x"); // Holt den Wert des Parameters "hj"
-
-          links[x - 1].classList.add("active");
-        });
-    </script>
+    <bottom-nav></bottom-nav>
+    <script src="../components/bottomNav.js" type="module"></script>
+    <script src="../components/header.js" type="module"></script>
+    <script src="../components/avgCircle.js" type="module"></script>
   </body>
 </html>

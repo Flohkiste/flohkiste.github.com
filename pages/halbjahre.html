@@ -3,45 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>halbjahr</title>
+    <title>Halbjahr</title>
     <link rel="stylesheet" href="../assets/css/farben.css" />
     <link rel="stylesheet" href="../assets/css/bottom-nav.css" />
     <link rel="stylesheet" href="../assets/css/halbjahre.css" />
     <link rel="stylesheet" href="../assets/css/avgCircle.css" />
   </head>
   <body>
-    <div id="header-placeholder"></div>
+    <header-component></header-component>
     <div class="scroller">
-      <div id="avg-placeholder"></div>
-      <script>
-        fetch("../components/avgCircle.html")
-          .then((response) => response.text())
-          .then((data) => {
-            document.getElementById("avg-placeholder").innerHTML = data;
-          });
-
-        fetch("../components/header.html")
-          .then((response) => response.text())
-          .then((data) => {
-            document.getElementById("header-placeholder").innerHTML = data;
-          });
-      </script>
+      <avg-circle></avg-circle>
       <div>Fächer</div>
     </div>
-    <div id="bottom-nav-placeholder"></div>
-    <script>
-      fetch("../components/bottom-nav.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("bottom-nav-placeholder").innerHTML = data;
-
-          const currentUrl = new URL(window.location.href);
-          const links = document.getElementsByClassName("link");
-          const params = new URLSearchParams(currentUrl.search);
-          const x = params.get("x");
-
-          links[x - 1].classList.add("active");
-        });
-    </script>
+    <bottom-nav></bottom-nav>
+    <script src="../components/bottomNav.js" type="module"></script>
+    <script src="../components/header.js" type="module"></script>
+    <script src="../components/avgCircle.js" type="module"></script>
   </body>
 </html>
