@@ -66,7 +66,7 @@ class BottomNav extends HTMLElement {
         <a href="../pages/index.html?x=5" class="link">
           <img src="../assets/images/graduation.png" alt="" />Abi
         </a>
-        <a href="" class="link">
+        <a href="../pages/editSubject.html?x=6" class="link">
           <img src="../assets/images/settings.png" alt="" />Einst.
         </a>
       </footer>
