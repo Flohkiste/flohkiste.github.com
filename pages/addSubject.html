@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Subject</title>
+</head>
+<body>
+    <header-component></header-component>
+    <div class="scroller">
+        <h1>Add Subject</h1>
+        <form id="add-subject-form">
+            <label for="subject-name">Subject Name:</label>
+            <input type="text" id="subject-name" name="subject-name" required>
+            <label for="subject-weight">Subject Weight:</label>
+            <input type="range" id="subject-weight" name="subject-weight" min="1" max="5" step="1" required>
+            <button type="submit">Add Subject</button>
+        </form>
+    </div>
+    <bottom-nav></bottom-nav>
+
+    <script src="../components/bottomNav.js" type="module"></script>
+    <script src="../components/header.js" type="module"></script>
+</body>
+</html>
