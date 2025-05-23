@@ -51,22 +51,13 @@ class BottomNav extends HTMLElement {
         }
       </style>
       <footer id="navbar">
-        <a href="../pages/halbjahre.html?x=1" class="link">
-          <img src="../assets/images/circle.png" alt="" />1.HJ
+        <a href="../pages/faecher.html?x=1" class="link">
+          <img src="../assets/images/faecher.png" alt="" />Fächer
         </a>
-        <a href="../pages/halbjahre.html?x=2" class="link">
-          <img src="../assets/images/circle.png" alt="" />2.HJ
-        </a>
-        <a href="../pages/halbjahre.html?x=3" class="link">
-          <img src="../assets/images/circle.png" alt="" />3.HJ
-        </a>
-        <a href="../pages/halbjahre.html?x=4" class="link">
-          <img src="../assets/images/circle.png" alt="" />4.HJ
-        </a>
-        <a href="../pages/index.html?x=5" class="link">
+        <a href="../pages/index.html?x=2" class="link">
           <img src="../assets/images/graduation.png" alt="" />Abi
         </a>
-        <a href="../pages/addSubject.html?x=6" class="link">
+        <a href="" class="link">
           <img src="../assets/images/settings.png" alt="" />Einst.
         </a>
       </footer>

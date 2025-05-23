@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Halbjahr</title>
+    <link rel="stylesheet" href="../assets/css/farben.css" />
+    <link rel="stylesheet" href="../assets/css/faecher.css" />
+  </head>
+  <body>
+    <header-component title="Schulfächer"></header-component>
+    <div class="scroller">
+      <button id="addSubjectBtn">Fach hinzufügen</button>
+      <div id="faecherContainer"></div>
+    </div>
+
+    <!-- Popup -->
+    <div id="addSubjectModal" class="modal" style="display: none">
+      <div class="modal-content">
+        <span class="close" id="closeModalBtn">&times;</span>
+        <h2>Fach hinzufügen</h2>
+        <input type="text" id="subjectNameInput" placeholder="Fachname" />
+        <div style="margin-top: 16px">
+          <button id="saveSubjectBtn">Speichern</button>
+          <button id="cancelSubjectBtn">Abbrechen</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="editSubjectModal" class="modal" style="display: none">
+      <div class="modal-content halbjahre-popup">
+        <h2 class="popup-title">Halbjahresnoten</h2>
+        <div class="halbjahre-list">
+          <halbjahr-card
+            halbjahr="1. Halbjahr"
+            schnitt="6"
+            gewichtung="1"
+          ></halbjahr-card>
+          <halbjahr-card
+            halbjahr="2. Halbjahr"
+            schnitt="7"
+            gewichtung="1"
+          ></halbjahr-card>
+          <halbjahr-card
+            halbjahr="3. Halbjahr"
+            schnitt="3"
+            gewichtung="1"
+          ></halbjahr-card>
+          <halbjahr-card
+            halbjahr="4. Halbjahr"
+            schnitt="-"
+            gewichtung="1"
+          ></halbjahr-card>
+        </div>
+        <button id="closeEditSubjectBtn" class="popup-btn cancel">
+          Speichern
+        </button>
+      </div>
+    </div>
+
+    <bottom-nav></bottom-nav>
+    <script src="../components/bottomNav.js" type="module"></script>
+    <script src="../components/header.js" type="module"></script>
+    <script src="../components/HalbjahrCard.js" type="module"></script>
+    <script src="../assets/scripts/Steuerung.js"></script>
+    <script src="../components/FaecherCard.js" type="module"></script>
+    <script src="../assets/scripts/faecher.js"></script>
+  </body>
+</html>
