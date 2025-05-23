@@ -55,9 +55,38 @@ window.onclick = (event) => {
 const editSubjectModal = document.getElementById("editSubjectModal");
 const closeEditSubjectBtn = document.getElementById("closeEditSubjectBtn");
 
-function openEditSubjectModal() {
+function openEditSubjectModal(index) {
+  const fach = steuerung.getFaecher()[index];
   editSubjectModal.style.display = "block";
+  // Titel dynamisch setzen
+  const titleElem = editSubjectModal.querySelector(".popup-title");
+  if (titleElem && fach) {
+    titleElem.textContent = `Halbjahresnoten - ${fach.name}`;
+  }
+
+  // Halbjahresnoten dynamisch einfügen
+  const halbjahreList = editSubjectModal.querySelector(".halbjahre-list");
+  halbjahreList.innerHTML = ""; // Vorherige Noten entfernen
+
+  // Annahme: fach.halbjahre ist ein Array mit Noten (z.B. [6, 7, 3, "-"])
+  // Falls nicht vorhanden, 4 leere Halbjahre anzeigen
+  const halbjahre =
+    fach.halbjahre && fach.halbjahre.length
+      ? fach.halbjahre
+      : ["-", "-", "-", "-"];
+
+  halbjahre.forEach((note, i) => {
+    const card = document.createElement("halbjahr-card");
+    card.setAttribute("halbjahr", `${i + 1}. Halbjahr`);
+    card.setAttribute(
+      "schnitt",
+      note !== undefined && note !== null && note !== "" ? note : "-"
+    );
+    card.setAttribute("gewichtung", "1");
+    halbjahreList.appendChild(card);
+  });
 }
+
 closeEditSubjectBtn.onclick = () => {
   editSubjectModal.style.display = "none";
 };

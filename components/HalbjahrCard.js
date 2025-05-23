@@ -84,12 +84,35 @@ class HalbjahrCard extends HTMLElement {
     <div class="halbjahr-label">${this.halbjahr}</div>
     <div class="halbjahr-content">
       <div class="halbjahr-circle">
-        <input class="halbjahr-input" type="text" value="${this.schnitt}" />
+        <input class="halbjahr-input" type="text" min="0" max="15" step="1" value="${this.schnitt}" />
       </div>
       <span class="halbjahr-gewichtung">Gewichtung x${this.gewichtung}</span>
     </div>
   </div>
   `;
+
+    const input = this.shadowRoot.querySelector(".halbjahr-input");
+    input.addEventListener("input", (e) => {
+      // "-" ist erlaubt, leeres Feld bleibt leer
+      if (input.value === "" || input.value === "-") return;
+      let value = parseInt(input.value, 10);
+      if (isNaN(value)) {
+        input.value = "-";
+        return;
+      }
+      if (value < 0) value = 0;
+      if (value > 15) value = 15;
+      input.value = value;
+    });
+
+    // "-" beim Fokussieren sofort entfernen
+    input.addEventListener("focus", () => {
+      if (input.value === "-") input.value = "";
+    });
+
+    input.addEventListener("focusout", () => {
+      if (input.value === "") input.value = "-";
+    });
   }
 }
 
