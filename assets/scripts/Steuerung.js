@@ -2,7 +2,8 @@ class Fach {
   constructor(name, gewichtung = 1, halbjahre = []) {
     this.name = name;
     this.gewichtung = gewichtung;
-    this.halbjahre = halbjahre; // z.B. Array von Noten oder Halbjahr-Objekten
+    this.halbjahre = halbjahre;
+    this.gewichtungHalbjahre = [1, 1, 1, 1];
   }
 
   static fromObject(obj) {
@@ -32,5 +33,10 @@ class Steuerung {
 
   getFaecher() {
     return this.faecher;
+  }
+
+  fachEntfernen(index) {
+    this.faecher.splice(index, 1);
+    this.speichereFaecher();
   }
 }

@@ -82,18 +82,99 @@ function openEditSubjectModal(index) {
       "schnitt",
       note !== undefined && note !== null && note !== "" ? note : "-"
     );
-    card.setAttribute("gewichtung", "1");
+    // Gewichtung aus dem Fach übernehmen, sonst "1"
+    const gewichtung =
+      fach.gewichtungHalbjahre && fach.gewichtungHalbjahre[i] !== undefined
+        ? String(fach.gewichtungHalbjahre[i])
+        : "1";
+    card.setAttribute("gewichtung", gewichtung);
     halbjahreList.appendChild(card);
   });
+
+  // === Event-Listener für Löschen-Button jedes Mal neu setzen ===
+  const deleteSubjectBtn = document.getElementById("deleteSubjectBtn");
+  if (deleteSubjectBtn) {
+    deleteSubjectBtn.onclick = () => {
+      const titleElem = editSubjectModal.querySelector(".popup-title");
+      const fachName = titleElem.textContent.replace(/^Halbjahresnoten - /, "");
+      if (confirm(`Fach "${fachName}" wirklich löschen?`)) {
+        const faecher = steuerung.getFaecher();
+        const index = faecher.findIndex((f) => f.name === fachName);
+        if (index !== -1) {
+          steuerung.fachEntfernen(index);
+          steuerung.speichereFaecher();
+          editSubjectModal.style.display = "none";
+          setTimeout(faecherAnzeigen, 0);
+        }
+      }
+    };
+  }
 }
 
 closeEditSubjectBtn.onclick = () => {
+  // Noten und Gewichtungen auslesen
+  const halbjahrCards = editSubjectModal.querySelectorAll("halbjahr-card");
+  const neueNoten = [];
+  const neueGewichtungen = [];
+  halbjahrCards.forEach((card) => {
+    const input = card.shadowRoot.querySelector(".halbjahr-input");
+    let value = input.value.trim();
+    neueNoten.push(
+      value === "-" ? "-" : isNaN(Number(value)) ? "-" : Number(value)
+    );
+    // Gewichtung aus Attribut lesen
+    neueGewichtungen.push(card.getAttribute("gewichtung") || "1");
+  });
+
+  // Aktuelles Fach aktualisieren
+  const titleElem = editSubjectModal.querySelector(".popup-title");
+  const fachName = titleElem.textContent.replace(/^Halbjahresnoten - /, "");
+  const faecher = steuerung.getFaecher();
+  const fach = faecher.find((f) => f.name === fachName);
+  if (fach) {
+    fach.halbjahre = neueNoten;
+    fach.gewichtungHalbjahre = neueGewichtungen.map(Number); // als Zahlen speichern
+    steuerung.speichereFaecher();
+  }
+
   editSubjectModal.style.display = "none";
+  setTimeout(faecherAnzeigen, 0); // Anzeige aktualisieren
 };
+
 window.onclick = (event) => {
+  // Modal für Fach hinzufügen
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+  // Modal für Halbjahre bearbeiten
   if (event.target === editSubjectModal) {
     editSubjectModal.style.display = "none";
   }
 };
+
+const cancelEditSubjectBtn = document.getElementById("cancelEditSubjectBtn");
+if (cancelEditSubjectBtn) {
+  cancelEditSubjectBtn.onclick = () => {
+    editSubjectModal.style.display = "none";
+  };
+}
+
+const deleteSubjectBtn = document.getElementById("deleteSubjectBtn");
+if (deleteSubjectBtn) {
+  deleteSubjectBtn.onclick = () => {
+    const titleElem = editSubjectModal.querySelector(".popup-title");
+    const fachName = titleElem.textContent.replace(/^Halbjahresnoten - /, "");
+    if (confirm(`Fach "${fachName}" wirklich löschen?`)) {
+      const faecher = steuerung.getFaecher();
+      const index = faecher.findIndex((f) => f.name === fachName);
+      if (index !== -1) {
+        steuerung.fachEntfernen(index);
+        steuerung.speichereFaecher();
+        editSubjectModal.style.display = "none";
+        setTimeout(faecherAnzeigen, 0);
+      }
+    }
+  };
+}
 
 faecherAnzeigen();

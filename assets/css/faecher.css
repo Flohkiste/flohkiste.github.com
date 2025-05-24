@@ -129,3 +129,51 @@ header-component {
   gap: 12px;
   margin-bottom: 18px;
 }
+
+.popup-btn {
+  font-size: 1.1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin: 0;
+}
+
+.popup-btn.primary {
+  background: var(--primary, #16a300);
+  color: #fff;
+}
+
+.popup-btn.primary:hover,
+.popup-btn.primary:focus {
+  background: #128000;
+}
+
+.popup-btn.cancel {
+  background: #444;
+  color: #fff;
+}
+
+.popup-btn.cancel:hover,
+.popup-btn.cancel:focus {
+  background: #222;
+}
+
+.popup-btn.delete {
+  background: #c0392b;
+  color: #fff;
+  padding: 8px 14px; /* Weniger Padding für schmaleren Button */
+  font-size: 1em;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: background 0.2s;
+}
+.popup-btn.delete:hover,
+.popup-btn.delete:focus {
+  background: #a93226;
+}

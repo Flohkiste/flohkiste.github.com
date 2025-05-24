@@ -2,8 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Halbjahr</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Fächer</title>
     <link rel="stylesheet" href="../assets/css/farben.css" />
     <link rel="stylesheet" href="../assets/css/faecher.css" />
   </head>
@@ -30,6 +33,13 @@
     <div id="editSubjectModal" class="modal" style="display: none">
       <div class="modal-content halbjahre-popup">
         <h2 class="popup-title">Halbjahresnoten</h2>
+        <button
+          id="deleteSubjectBtn"
+          class="popup-btn delete"
+          style="margin-bottom: 16px"
+        >
+          Fach löschen
+        </button>
         <div class="halbjahre-list">
           <halbjahr-card
             halbjahr="1. Halbjahr"
@@ -52,9 +62,21 @@
             gewichtung="1"
           ></halbjahr-card>
         </div>
-        <button id="closeEditSubjectBtn" class="popup-btn cancel">
-          Speichern
-        </button>
+        <div
+          style="
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 16px;
+          "
+        >
+          <button id="closeEditSubjectBtn" class="popup-btn primary">
+            Speichern
+          </button>
+          <button id="cancelEditSubjectBtn" class="popup-btn cancel">
+            Abbrechen
+          </button>
+        </div>
       </div>
     </div>
 
