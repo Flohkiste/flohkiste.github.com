@@ -147,6 +147,10 @@ class FaecherCard extends HTMLElement {
             fach.gewichtungHalbjahre[idx] === 0 ? 1 : 0;
           localStorage.setItem("faecher", JSON.stringify(faecher));
           this.render(); // UI aktualisieren
+
+          if (window.updateApp) {
+            window.updateApp();
+          }
         }
       });
     });

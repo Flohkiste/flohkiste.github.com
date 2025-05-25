@@ -73,12 +73,19 @@ class Steuerung {
     let x = 0;
     for (const fach of this.faecher) {
       const calcHalbjahre = fach.getHalbjahre();
+      let y = 0;
       for (let i = 0; i < calcHalbjahre.length; i++) {
         const val = parseInt(calcHalbjahre[i], 10);
         if (!isNaN(val)) {
-          x += val * (fach.gewichtungHalbjahre[i] || 1);
+          const gewichtung =
+            fach.gewichtungHalbjahre &&
+            fach.gewichtungHalbjahre[i] !== undefined
+              ? fach.gewichtungHalbjahre[i]
+              : 1;
+          y += val * gewichtung;
         }
       }
+      x += y * fach.gewichtung;
     }
     return x;
   }

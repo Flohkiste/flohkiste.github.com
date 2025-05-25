@@ -15,7 +15,7 @@
     <div class="scroller">
       <avg-circle avg="1,0"></avg-circle>
       <div class="block-summary-row">
-        <div class="block-summary-card" id="block1">
+        <div class="block-summary-card" id="block1Sum">
           <div class="block-summary-title">Block 1</div>
           <div class="block-summary-avg green">14,0</div>
           <div class="block-summary-points">0 / 600</div>
@@ -58,7 +58,6 @@
 
     <div id="editSubjectModal" class="modal" style="display: none"></div>
 
-    <!-- Template für das Edit-Popup -->
     <template id="editSubjectTemplate">
       <div class="modal-content halbjahre-popup">
         <h2 class="popup-title">Halbjahresnoten</h2>
@@ -70,6 +69,13 @@
           Fach löschen
         </button>
         <div class="halbjahre-list"></div>
+        <div class="switch-container">
+          <span class="switch-label">Doppelt gewichten</span>
+          <label class="switch">
+            <input type="checkbox" id="gewichtungSwitch" />
+            <span class="slider"></span>
+          </label>
+        </div>
         <div
           style="
             display: flex;
