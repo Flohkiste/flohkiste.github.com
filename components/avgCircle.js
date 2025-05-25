@@ -1,9 +1,24 @@
 class AvgCircle extends HTMLElement {
   constructor() {
     super();
-    const shadow = this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: "open" });
+    this.render();
+  }
 
-    shadow.innerHTML = `
+  static get observedAttributes() {
+    return ["avg"];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === "avg") {
+      this.render();
+    }
+  }
+
+  render() {
+    const avg = this.getAttribute("avg") || "-";
+
+    this.shadowRoot.innerHTML = `
         <style>
           #avgCircle {
             width: 100%;
@@ -30,7 +45,7 @@ class AvgCircle extends HTMLElement {
           }
         </style>
         <div id="avgCircle">
-          <div id="circle">1,9</div>
+          <div id="circle">${avg}</div>
         </div>
       `;
   }

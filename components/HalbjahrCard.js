@@ -104,16 +104,18 @@ class HalbjahrCard extends HTMLElement {
     <div class="halbjahr-label">${this.halbjahr}</div>
     <div class="halbjahr-content">
       <div class="halbjahr-circle">
-        <input class="halbjahr-input" type="text" min="0" max="15" step="1" value="${
-          this.schnitt
-        }" />
+        <input class="halbjahr-input" type="text" min="0" max="15" step="1" value="${this.schnitt}" />
       </div>
-  <button class="klammer-btn${
-    this.gewichtung === "0" ? " inactive" : ""
-  }" type="button">Klammern</button>
+  <!-- Klammern-Button Platz -->
     </div>
   </div>
   `;
+
+    /*
+  <button class="klammer-btn${
+    this.gewichtung === "0" ? " inactive" : ""
+  }" type="button">Klammern</button>
+  */
 
     const input = this.shadowRoot.querySelector(".halbjahr-input");
     input.addEventListener("input", (e) => {
@@ -139,13 +141,13 @@ class HalbjahrCard extends HTMLElement {
     });
 
     // Klammern-Button Logik
-    const klammerBtn = this.shadowRoot.querySelector(".klammer-btn");
+    /*const klammerBtn = this.shadowRoot.querySelector(".klammer-btn");
     klammerBtn.addEventListener("click", () => {
       const neueGewichtung = klammerBtn.classList.toggle("inactive")
         ? "0"
         : "1";
       this.setAttribute("gewichtung", neueGewichtung);
-    });
+    });*/
   }
 }
 
