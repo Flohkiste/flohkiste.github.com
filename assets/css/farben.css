@@ -1,8 +1,11 @@
-:root{
-    --text: #effaef;
-    --primarybackground: #292929;
-    --secondarybackground: #333;
-    --primary: #16a300;
-    --secondary: #dbffe5;
-    --accent: #3dff71;
+:root {
+  --text: #effaef;
+  --primarybackground: #292929;
+  --secondarybackground: #333;
+  --primary: #16a300;
+  --secondary: #dbffe5;
+  --accent: #3dff71;
+  --popupbackground: #232323;
+  --delete: #c0392b;
+  --calculated: #66bb6a8a;
 }

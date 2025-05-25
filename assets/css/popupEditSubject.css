@@ -1,0 +1,55 @@
+.halbjahre-popup {
+  background: var(--popupbackground, #232323);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.6);
+  padding: 18px 8px 18px 8px;
+  width: 96vw;
+  max-width: 370px;
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: 5vh auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.halbjahre-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.popup-btn {
+  font-size: 1.1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin: 0;
+}
+
+.popup-btn.primary {
+  background: var(--primary, #16a300);
+  color: #fff;
+}
+
+.popup-btn.cancel {
+  background: var(--secondarybackground, #444);
+  color: var(--text);
+}
+
+.popup-btn.delete {
+  background: var(--delete, #c0392b);
+  color: #fff;
+  padding: 8px 14px;
+  font-size: 1em;
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: background 0.2s;
+}

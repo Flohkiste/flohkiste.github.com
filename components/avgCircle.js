@@ -41,6 +41,7 @@ class AvgCircle extends HTMLElement {
             text-align: center;
             text-decoration: none;
             font-size: 50px;
+            font-weight: bold;
             box-shadow: 0px 0px 40px 10px var(--primary);
           }
         </style>
