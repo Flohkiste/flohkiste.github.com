@@ -40,9 +40,26 @@ class Fach {
   }
 }
 
+class Abi {
+  constructor() {
+    this.fach = "";
+    this.gewichtung = 4;
+    this.note = "-";
+  }
+
+  static fromObject(obj) {
+    const abi = new Abi();
+    abi.fach = obj.fach || "";
+    abi.gewichtung = obj.gewichtung || 4;
+    abi.note = obj.note || "-";
+    return abi;
+  }
+}
+
 class Steuerung {
   constructor() {
     this.faecher = this.ladeFaecher();
+    this.abis = this.ladeAbis();
   }
 
   ladeFaecher() {
@@ -52,6 +69,15 @@ class Steuerung {
 
   speichereFaecher() {
     localStorage.setItem("faecher", JSON.stringify(this.faecher));
+  }
+
+  ladeAbis() {
+    const data = localStorage.getItem("abis");
+    return data ? JSON.parse(data).map(Abi.fromObject) : [];
+  }
+
+  speichereAbis() {
+    localStorage.setItem("abis", JSON.stringify(this.abis));
   }
 
   fachHinzufuegen(name, gewichtung, halbjahre) {

@@ -64,3 +64,95 @@ body {
   align-items: center;
   gap: 12px;
 }
+
+.block2-table {
+  background: #333;
+  border-radius: 12px;
+  padding: 16px 8px;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  width: 95%;
+  max-width: 400px;
+}
+.block2-header,
+.block2-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.block2-header {
+  font-weight: bold;
+  color: var(--text, #fff);
+  border-bottom: 1px solid #444;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+.block2-col {
+  text-align: center;
+  font-size: 1.1em;
+}
+
+/* Spezifische Breiten für die Spalten */
+.block2-col:nth-child(1) {
+  /* P1, P2, etc. - schmaler */
+  flex: 0 0 40px;
+  min-width: 40px;
+}
+
+.block2-col:nth-child(2) {
+  /* Fach - am breitesten */
+  flex: 2;
+  min-width: 120px;
+}
+
+.block2-col:nth-child(3) {
+  /* Note - mittel */
+  flex: 0 0 60px;
+  min-width: 60px;
+}
+.block2-fach {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+
+.block2-fach-input,
+.block2-note-input {
+  background: transparent;
+  border: none;
+  color: var(--text, #fff);
+  font-size: 1.1em;
+  text-align: center;
+  width: 100%;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.block2-fach-input:focus,
+.block2-note-input:focus {
+  outline: none;
+}
+
+.block2-fach-input::placeholder,
+.block2-note-input::placeholder {
+  color: #888;
+  opacity: 1;
+}
+
+.block2-note-input {
+  font-weight: bold;
+}
+
+/* Remove number input arrows */
+.block2-note-input::-webkit-outer-spin-button,
+.block2-note-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.block2-note-input[type="number"] {
+  -moz-appearance: textfield;
+}
