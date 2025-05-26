@@ -38,6 +38,8 @@ function faecherAnzeigen() {
 
 function updateSummary() {
   console.log("updateSummary called");
+
+  // Block 1 Summary
   const block1Elem = document.getElementById("block1Sum");
   if (!block1Elem) {
     console.error("block1Sum element not found");
@@ -61,6 +63,30 @@ function updateSummary() {
 
   pointSumBlock1.textContent = `${sum} / 600`;
   avgElem.textContent = `${avg.toFixed(1)}`;
+
+  // Block 2 Summary
+  const block2Elem = document.getElementById("block2Sum");
+  if (!block2Elem) {
+    console.error("block2Sum element not found");
+    return;
+  }
+
+  const pointSumBlock2 = block2Elem.getElementsByClassName(
+    "block-summary-points"
+  )[0];
+  const avgBlock2Elem =
+    block2Elem.getElementsByClassName("block-summary-avg")[0];
+
+  if (!pointSumBlock2 || !avgBlock2Elem) {
+    console.error("Block 2 summary elements not found");
+    return;
+  }
+
+  const b2PointSum = steuerung.getBlock2PointSum();
+  const b2Avg = steuerung.getBlock2PointAvg();
+
+  pointSumBlock2.textContent = `${b2PointSum} / 300`;
+  avgBlock2Elem.textContent = `${b2Avg.toFixed(1)}`;
 }
 
 // Edit-Popup öffnen mit Template
@@ -173,8 +199,58 @@ function setupEditModalEventListeners(modal, fach) {
   }
 }
 
+function setupAbiListeners() {
+  const block2NotenInputs =
+    document.getElementsByClassName("block2-note-input");
+  const block2FachInputs = document.getElementsByClassName("block2-fach-input");
+
+  for (let x = 0; x < block2NotenInputs.length; x++) {
+    const input = block2NotenInputs[x];
+    const fachInput = block2FachInputs[x];
+
+    input.value = steuerung.getAbiNoten()[x] || "-";
+    fachInput.value = steuerung.getAbiNamen()[x] || "";
+
+    fachInput.addEventListener("change", () => {
+      steuerung.abiNamen[x] = fachInput.value.trim();
+      steuerung.speichereAbiNamen();
+      update();
+    });
+
+    input.addEventListener("input", () => {
+      if (input.value === "") return;
+      let value = parseInt(input.value, 10);
+      if (isNaN(value)) {
+        input.value = "";
+        return;
+      }
+      if (value < 0) value = 0;
+      if (value > 15) value = 15;
+      input.value = value;
+    });
+
+    input.addEventListener("change", () => {
+      const note = input.value.trim();
+      if (note === "") {
+        steuerung.abiNoten[x] = "";
+      } else {
+        const value = parseInt(note, 10);
+        if (!isNaN(value) && value >= 0 && value <= 15) {
+          steuerung.abiNoten[x] = value;
+        } else {
+          input.value = "";
+          return;
+        }
+      }
+      steuerung.speichereAbiNoten();
+      update();
+    });
+  }
+}
+
 // Popup-Setup
 setupAddSubjectPopup(steuerung, update);
+setupAbiListeners();
 
 // Initial update
 update();
