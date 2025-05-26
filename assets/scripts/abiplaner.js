@@ -82,11 +82,29 @@ function updateSummary() {
     return;
   }
 
-  const b2PointSum = steuerung.getBlock2PointSum();
-  const b2Avg = steuerung.getBlock2PointAvg();
+  const b2PointSum = steuerung.getAbiPointSum();
+  const b2Avg = steuerung.getAbiPointAvg();
 
   pointSumBlock2.textContent = `${b2PointSum} / 300`;
   avgBlock2Elem.textContent = `${b2Avg.toFixed(1)}`;
+
+  //Gesamt Summary
+  const gesamtElem = document.getElementById("gesamtSum");
+  const pointSumGes = gesamtElem.getElementsByClassName(
+    "block-summary-points"
+  )[0];
+  const pointAvgGes = gesamtElem.getElementsByClassName("block-summary-avg")[0];
+
+  const gesamtSum = steuerung.getAllPointSum();
+  const gesamtAvg = steuerung.getAllPointAvg();
+
+  pointSumGes.textContent = `${gesamtSum} / 900`;
+  pointAvgGes.textContent = `${gesamtAvg.toFixed(1)}`;
+
+  // Abi Note
+  const abiNoteElem = document.getElementById("abiNote");
+
+  abiNoteElem.setAttribute("avg", steuerung.getAbiNote().toFixed(1));
 }
 
 // Edit-Popup öffnen mit Template

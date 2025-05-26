@@ -125,7 +125,7 @@ class Steuerung {
     for (const note of this.abiNoten) {
       const val = parseInt(note, 10);
       if (!isNaN(val)) {
-        sum += val;
+        sum += val * 4;
       }
     }
     return sum;
@@ -163,6 +163,52 @@ class Steuerung {
   }
 
   getAllPointAvg() {
-    
+    return (this.getAllPointSum() / 900) * 15;
+  }
+
+  getAllPointSum() {
+    return this.getPointSum() + this.getAbiPointSum();
+  }
+
+  getAbiNote() {
+    const punkte = this.getAllPointSum();
+    // Tabelle: [ [Note, Mindestpunktzahl], ... ] absteigend sortiert
+    const tabelle = [
+      [1.0, 823],
+      [1.1, 805],
+      [1.2, 787],
+      [1.3, 769],
+      [1.4, 751],
+      [1.5, 733],
+      [1.6, 715],
+      [1.7, 697],
+      [1.8, 679],
+      [1.9, 661],
+      [2.0, 643],
+      [2.1, 625],
+      [2.2, 607],
+      [2.3, 589],
+      [2.4, 571],
+      [2.5, 553],
+      [2.6, 535],
+      [2.7, 517],
+      [2.8, 499],
+      [2.9, 481],
+      [3.0, 463],
+      [3.1, 445],
+      [3.2, 427],
+      [3.3, 409],
+      [3.4, 391],
+      [3.5, 373],
+      [3.6, 355],
+      [3.7, 337],
+      [3.8, 319],
+      [3.9, 301],
+      [4.0, 300],
+    ];
+    for (const [note, minPunkte] of tabelle) {
+      if (punkte >= minPunkte) return note;
+    }
+    return 6.0; // schlechter als 4.0 = nicht bestanden
   }
 }
