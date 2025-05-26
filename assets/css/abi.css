@@ -38,6 +38,7 @@ body {
 .block-summary-title {
   font-size: 1.3em; /* Reduziert */
   font-weight: bold;
+  text-decoration: none;
   margin-bottom: 8px;
   color: var(--text);
 }
