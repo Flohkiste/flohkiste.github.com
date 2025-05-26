@@ -1,6 +1,6 @@
 class HalbjahrCard extends HTMLElement {
   static get observedAttributes() {
-    return ["halbjahr", "schnitt", "gewichtung"];
+    return ["halbjahr", "schnitt"];
   }
 
   attributeChangedCallback() {
@@ -12,9 +12,6 @@ class HalbjahrCard extends HTMLElement {
   }
   get schnitt() {
     return this.getAttribute("schnitt") || "-";
-  }
-  get gewichtung() {
-    return this.getAttribute("gewichtung") || "1";
   }
 
   connectedCallback() {
@@ -72,33 +69,6 @@ class HalbjahrCard extends HTMLElement {
     .halbjahr-input:focus {
       outline: none;
     }
-    .halbjahr-gewichtung {
-      color: var(--primary, #16a300);
-      font-size: 1em;
-      font-weight: 500;
-      margin-top: 8px;
-      text-align: center;
-    }
-    .klammer-btn {
-      margin-top: 8px;
-      background: var(--primary, #16a300);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 6px 16px;
-      font-size: 1em;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .klammer-btn:hover {
-      background: #128000;
-    }
-    .klammer-btn.inactive {
-      background: #444;
-      color: #aaa;
-      cursor: not-allowed;
-    }
   </style>
   <div class="halbjahr-card">
     <div class="halbjahr-label">${this.halbjahr}</div>
@@ -106,20 +76,12 @@ class HalbjahrCard extends HTMLElement {
       <div class="halbjahr-circle">
         <input class="halbjahr-input" type="text" min="0" max="15" step="1" value="${this.schnitt}" />
       </div>
-  <!-- Klammern-Button Platz -->
     </div>
   </div>
   `;
 
-    /*
-  <button class="klammer-btn${
-    this.gewichtung === "0" ? " inactive" : ""
-  }" type="button">Klammern</button>
-  */
-
     const input = this.shadowRoot.querySelector(".halbjahr-input");
     input.addEventListener("input", (e) => {
-      // "-" ist erlaubt, leeres Feld bleibt leer
       if (input.value === "" || input.value === "-") return;
       let value = parseInt(input.value, 10);
       if (isNaN(value)) {
@@ -131,7 +93,6 @@ class HalbjahrCard extends HTMLElement {
       input.value = value;
     });
 
-    // "-" beim Fokussieren sofort entfernen
     input.addEventListener("focus", () => {
       if (input.value === "-") input.value = "";
     });
@@ -139,15 +100,6 @@ class HalbjahrCard extends HTMLElement {
     input.addEventListener("focusout", () => {
       if (input.value === "") input.value = "-";
     });
-
-    // Klammern-Button Logik
-    /*const klammerBtn = this.shadowRoot.querySelector(".klammer-btn");
-    klammerBtn.addEventListener("click", () => {
-      const neueGewichtung = klammerBtn.classList.toggle("inactive")
-        ? "0"
-        : "1";
-      this.setAttribute("gewichtung", neueGewichtung);
-    });*/
   }
 }
 

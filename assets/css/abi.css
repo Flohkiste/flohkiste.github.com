@@ -4,3 +4,139 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
+
+.scroller {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5%;
+  padding-right: 5%;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.block-summary-row {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.block-summary-card {
+  background: var(--secondarybackground);
+  border-radius: 12px;
+  padding: 16px 20px;
+  min-width: 80px;
+  text-align: center;
+  color: var(--text);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.block-summary-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  text-decoration: none;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.block-summary-avg {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.block-summary-points {
+  font-size: 1em;
+  color: var(--text);
+}
+
+.block-summary-avg.green {
+  color: var(--primary, #16a300);
+}
+
+#block1Header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.block2-table {
+  background: #333;
+  border-radius: 12px;
+  padding: 16px 8px;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  width: 95%;
+  max-width: 400px;
+}
+.block2-header,
+.block2-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.block2-header {
+  font-weight: bold;
+  color: var(--text, #fff);
+  border-bottom: 1px solid #444;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+.block2-col {
+  text-align: center;
+  font-size: 1.1em;
+}
+
+.block2-col:nth-child(1) {
+  flex: 0 0 40px;
+  min-width: 40px;
+}
+
+.block2-col:nth-child(2) {
+  flex: 2;
+  min-width: 120px;
+}
+
+.block2-col:nth-child(3) {
+  flex: 0 0 60px;
+  min-width: 60px;
+}
+
+.block2-fach-input,
+.block2-note-input {
+  background: transparent;
+  border: none;
+  color: var(--text, #fff);
+  font-size: 1.1em;
+  text-align: center;
+  width: 100%;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.block2-fach-input:focus,
+.block2-note-input:focus {
+  outline: none;
+}
+
+.block2-fach-input::placeholder,
+.block2-note-input::placeholder {
+  color: #888;
+  opacity: 1;
+}
+
+.block2-note-input {
+  font-weight: bold;
+}
+
+.block2-note-input[type="number"] {
+  -moz-appearance: textfield;
+}

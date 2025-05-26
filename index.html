@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abi Planer</title>
+    <link rel="stylesheet" href="/assets/css/farben.css" />
+    <link rel="stylesheet" href="/assets/css/abi.css" />
+    <link rel="stylesheet" href="/assets/css/modal.css" />
+    <link rel="stylesheet" href="/assets/css/popupAddSubject.css" />
+    <link rel="stylesheet" href="/assets/css/popupEditSubject.css" />
+  </head>
+  <body>
+    <header-component></header-component>
+    <div class="scroller">
+      <avg-circle avg="1,0" id="abiNote"></avg-circle>
+      <div class="block-summary-row">
+        <div class="block-summary-card" id="block1Sum">
+          <a href="#block1" class="block-summary-title">Block 1</a>
+          <div class="block-summary-avg green">14,0</div>
+          <div class="block-summary-points">0 / 600</div>
+        </div>
+        <div class="block-summary-card" id="block2Sum">
+          <a href="#block2" class="block-summary-title">Block 2</a>
+          <div class="block-summary-avg green">15,0</div>
+          <div class="block-summary-points">0 / 300</div>
+        </div>
+        <div class="block-summary-card" id="gesamtSum">
+          <div class="block-summary-title">Gesamt</div>
+          <div class="block-summary-avg green">14,3</div>
+          <div class="block-summary-points">0 / 900</div>
+        </div>
+      </div>
+      <div id="block1">
+        <div id="block1Header">
+          <h2>Block 1</h2>
+          <button id="addSubjectBtn">neues Fach</button>
+        </div>
+        <div id="faecherContainer"></div>
+      </div>
+      <div id="block2">
+        <h2>Block 2</h2>
+        <div class="block2-table">
+          <div class="block2-header">
+            <span class="block2-col"></span>
+            <span class="block2-col">Fach</span>
+            <span class="block2-col">Note</span>
+          </div>
+          <div class="block2-row">
+            <span class="block2-col">S1</span>
+            <span class="block2-col">
+              <input
+                type="text"
+                class="block2-fach-input"
+                placeholder="Fach"
+                data-abi="0"
+              />
+            </span>
+            <span class="block2-col">
+              <input
+                type="number"
+                class="block2-note-input"
+                min="0"
+                max="15"
+                placeholder="-"
+                data-abi="0"
+              />
+            </span>
+          </div>
+          <div class="block2-row">
+            <span class="block2-col">S2</span>
+            <span class="block2-col">
+              <input
+                type="text"
+                class="block2-fach-input"
+                placeholder="Fach"
+                data-abi="1"
+              />
+            </span>
+            <span class="block2-col">
+              <input
+                type="number"
+                class="block2-note-input"
+                min="0"
+                max="15"
+                placeholder="-"
+                data-abi="1"
+              />
+            </span>
+          </div>
+          <div class="block2-row">
+            <span class="block2-col">S3</span>
+            <span class="block2-col">
+              <input
+                type="text"
+                class="block2-fach-input"
+                placeholder="Fach"
+                data-abi="2"
+              />
+            </span>
+            <span class="block2-col">
+              <input
+                type="number"
+                class="block2-note-input"
+                min="0"
+                max="15"
+                placeholder="-"
+                data-abi="2"
+              />
+            </span>
+          </div>
+          <div class="block2-row">
+            <span class="block2-col">S4</span>
+            <span class="block2-col">
+              <input
+                type="text"
+                class="block2-fach-input"
+                placeholder="Fach"
+                data-abi="3"
+              />
+            </span>
+            <span class="block2-col">
+              <input
+                type="number"
+                class="block2-note-input"
+                min="0"
+                max="15"
+                placeholder="-"
+                data-abi="3"
+              />
+            </span>
+          </div>
+          <div class="block2-row">
+            <span class="block2-col">M</span>
+            <span class="block2-col">
+              <input
+                type="text"
+                class="block2-fach-input"
+                placeholder="Fach"
+                data-abi="4"
+              />
+            </span>
+            <span class="block2-col">
+              <input
+                type="number"
+                class="block2-note-input"
+                min="0"
+                max="15"
+                placeholder="-"
+                data-abi="4"
+              />
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup -->
+    <div id="addSubjectModal" class="modal" style="display: none">
+      <div class="modal-content">
+        <span class="close" id="closeModalBtn">&times;</span>
+        <h2>Fach hinzufügen</h2>
+        <input type="text" id="subjectNameInput" placeholder="Fachname" />
+        <div style="margin-top: 16px">
+          <button id="saveSubjectBtn">Speichern</button>
+          <button id="cancelSubjectBtn">Abbrechen</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="editSubjectModal" class="modal" style="display: none"></div>
+
+    <template id="editSubjectTemplate">
+      <div class="modal-content halbjahre-popup">
+        <h2 class="popup-title">Halbjahresnoten</h2>
+        <button
+          id="deleteSubjectBtn"
+          class="popup-btn delete"
+          style="margin-bottom: 16px"
+        >
+          Fach löschen
+        </button>
+        <div class="halbjahre-list"></div>
+        <div class="switch-container">
+          <span class="switch-label">Doppelt gewichten</span>
+          <label class="switch">
+            <input type="checkbox" id="gewichtungSwitch" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div
+          style="
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 16px;
+          "
+        >
+          <button id="closeEditSubjectBtn" class="popup-btn primary">
+            Speichern
+          </button>
+          <button id="cancelEditSubjectBtn" class="popup-btn cancel">
+            Abbrechen
+          </button>
+        </div>
+      </div>
+    </template>
+
+    <script src="/assets/scripts/Steuerung.js"></script>
+    <script src="/components/header.js" type="module"></script>
+    <script src="/components/avgCircle.js" type="module"></script>
+    <script src="/components/HalbjahrCard.js" type="module"></script>
+    <script src="/components/FaecherCard.js" type="module"></script>
+    <script src="/assets/scripts/abiplaner.js" type="module"></script>
+  </body>
+</html>
