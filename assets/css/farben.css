@@ -1,3 +1,4 @@
+
 :root {
   --text: #effaef;
   --primarybackground: #292929;
@@ -9,3 +10,16 @@
   --delete: #c0392b;
   --calculated: #66bb6a8a;
 }
+/*
+:root {
+  --text: #effaef;
+  --primarybackground: #292929;
+  --secondarybackground: #333;
+  --primary: #b368a9;
+  --secondary: #dbffe5;
+  --accent: #da45b4;
+  --popupbackground: #232323;
+  --delete: #c0392b;
+  --calculated: #d885cd8a;
+}
+*/
