@@ -1,5 +1,5 @@
 class Fach {
-  constructor(name, gewichtung = 1, halbjahre = ["-", "-", "-", "-"]) {
+  constructor(name, gewichtung = 1, halbjahre = ["", "", "", ""]) {
     this.name = name;
     this.gewichtung = gewichtung;
     this.halbjahre = halbjahre;
@@ -35,16 +35,23 @@ class Fach {
 
   getHalbjahre() {
     const avg = this.getAvg();
+    console.log(
+      `Fach: ${this.name}, Durchschnitt: ${avg}, Halbjahre: ${this.halbjahre}`
+    );
     if (avg === -1) {
       return ["", "", "", ""];
     }
     let calcHalbjahre = [...this.halbjahre];
     for (let i = 0; i < 4; i++) {
-      if (calcHalbjahre[i] === "-") {
+      if (
+        calcHalbjahre[i] === "-" ||
+        calcHalbjahre[i] === "" ||
+        calcHalbjahre[i] === null ||
+        calcHalbjahre[i] === undefined
+      ) {
         calcHalbjahre[i] = avg;
       }
     }
-
     return calcHalbjahre;
   }
 }

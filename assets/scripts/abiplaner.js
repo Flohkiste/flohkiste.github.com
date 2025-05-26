@@ -160,9 +160,18 @@ function setupEditModalEventListeners(modal, fach) {
       halbjahrCards.forEach((card) => {
         const input = card.shadowRoot.querySelector(".halbjahr-input");
         let value = input.value.trim();
-        neueNoten.push(
-          value === "-" ? "-" : isNaN(Number(value)) ? "-" : Number(value)
-        );
+
+        if (value === "" || value === "-") {
+          neueNoten.push("");
+        } else {
+          const numValue = Number(value);
+          if (isNaN(numValue)) {
+            neueNoten.push("");
+          } else {
+            neueNoten.push(numValue);
+          }
+        }
+
         neueGewichtungen.push(card.getAttribute("gewichtung") || "1");
       });
 

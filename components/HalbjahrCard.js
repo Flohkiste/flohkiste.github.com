@@ -11,7 +11,7 @@ class HalbjahrCard extends HTMLElement {
     return this.getAttribute("halbjahr") || "";
   }
   get schnitt() {
-    return this.getAttribute("schnitt") || "-";
+    return this.getAttribute("schnitt") || "";
   }
 
   connectedCallback() {
@@ -74,7 +74,7 @@ class HalbjahrCard extends HTMLElement {
     <div class="halbjahr-label">${this.halbjahr}</div>
     <div class="halbjahr-content">
       <div class="halbjahr-circle">
-        <input class="halbjahr-input" type="text" min="0" max="15" step="1" value="${this.schnitt}" />
+        <input class="halbjahr-input" type="number" placeholder="-" min="0" max="15" value="${this.schnitt}" />
       </div>
     </div>
   </div>
@@ -82,23 +82,15 @@ class HalbjahrCard extends HTMLElement {
 
     const input = this.shadowRoot.querySelector(".halbjahr-input");
     input.addEventListener("input", (e) => {
-      if (input.value === "" || input.value === "-") return;
+      if (input.value === "") return;
       let value = parseInt(input.value, 10);
       if (isNaN(value)) {
-        input.value = "-";
+        input.value = "";
         return;
       }
       if (value < 0) value = 0;
       if (value > 15) value = 15;
       input.value = value;
-    });
-
-    input.addEventListener("focus", () => {
-      if (input.value === "-") input.value = "";
-    });
-
-    input.addEventListener("focusout", () => {
-      if (input.value === "") input.value = "-";
     });
   }
 }
