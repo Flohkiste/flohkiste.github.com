@@ -132,7 +132,6 @@ class FaecherCard extends HTMLElement {
     </div>
   `;
 
-    // Event Listener für Klammern-Logik
     this.shadowRoot.querySelectorAll(".note-btn").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -147,6 +146,14 @@ class FaecherCard extends HTMLElement {
             fach.gewichtungHalbjahre[idx] === 0 ? 1 : 0;
           localStorage.setItem("faecher", JSON.stringify(faecher));
           this.render(); // UI aktualisieren
+
+          // Custom Event für Update senden
+          this.dispatchEvent(
+            new CustomEvent("gewichtungChanged", {
+              bubbles: true,
+              detail: { fachName: this.titel, halbjahr: idx },
+            })
+          );
 
           if (window.updateApp) {
             window.updateApp();

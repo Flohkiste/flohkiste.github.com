@@ -32,6 +32,14 @@ function faecherAnzeigen() {
       update();
     });
 
+    // Event Listener für Gewichtungsänderungen
+    card.addEventListener("gewichtungChanged", (e) => {
+      console.log("gewichtungChanged event received for:", e.detail.fachName);
+      // WICHTIG: Steuerung-Daten neu laden, da localStorage direkt verändert wurde
+      steuerung.faecher = steuerung.ladeFaecher();
+      update();
+    });
+
     container.appendChild(card);
   });
 }
