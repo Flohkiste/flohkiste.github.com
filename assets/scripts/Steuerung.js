@@ -35,9 +35,6 @@ class Fach {
 
   getHalbjahre() {
     const avg = this.getAvg();
-    console.log(
-      `Fach: ${this.name}, Durchschnitt: ${avg}, Halbjahre: ${this.halbjahre}`
-    );
     if (avg === -1) {
       return ["", "", "", ""];
     }

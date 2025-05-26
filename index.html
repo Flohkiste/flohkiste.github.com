@@ -13,7 +13,14 @@
   <body>
     <header-component></header-component>
     <div class="scroller">
+      <div
+        class="info-button"
+        onclick="document.getElementById('imageModal').style.display='block'"
+      >
+        i
+      </div>
       <avg-circle avg="1,0" id="abiNote"></avg-circle>
+
       <div class="block-summary-row">
         <div class="block-summary-card" id="block1Sum">
           <a href="#block1" class="block-summary-title">Block 1</a>
@@ -168,6 +175,24 @@
           <button id="cancelSubjectBtn">Abbrechen</button>
         </div>
       </div>
+    </div>
+
+    <div
+      id="imageModal"
+      class="modal"
+      style="display: none"
+      onclick="this.style.display='none'"
+    >
+      <img
+        src="/assets/images/image.png"
+        style="
+          max-width: 90%;
+          max-height: 90%;
+          margin: auto;
+          display: block;
+          margin-top: 5vh;
+        "
+      />
     </div>
 
     <div id="editSubjectModal" class="modal" style="display: none"></div>
