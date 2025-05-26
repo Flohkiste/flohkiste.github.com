@@ -2,10 +2,8 @@ import { setupAddSubjectPopup } from "./popupAddSubject.js";
 import "/components/HalbjahrCard.js";
 import "/components/FaecherCard.js";
 
-console.log("Script geladen!");
 const steuerung = new Steuerung();
 
-// Update-Funktion global verfügbar machen
 window.updateApp = function () {
   faecherAnzeigen();
   updateSummary();
@@ -26,16 +24,7 @@ function faecherAnzeigen() {
     card.style.cursor = "pointer";
     card.onclick = () => openEditSubjectModal(index);
 
-    // Event Listener für Update (Custom Event von FaecherCard)
-    card.addEventListener("noteChanged", () => {
-      console.log("noteChanged event received");
-      update();
-    });
-
-    // Event Listener für Gewichtungsänderungen
     card.addEventListener("gewichtungChanged", (e) => {
-      console.log("gewichtungChanged event received for:", e.detail.fachName);
-      // WICHTIG: Steuerung-Daten neu laden, da localStorage direkt verändert wurde
       steuerung.faecher = steuerung.ladeFaecher();
       update();
     });
@@ -45,12 +34,8 @@ function faecherAnzeigen() {
 }
 
 function updateSummary() {
-  console.log("updateSummary called");
-
-  // Block 1 Summary
   const block1Elem = document.getElementById("block1Sum");
   if (!block1Elem) {
-    console.error("block1Sum element not found");
     return;
   }
 
@@ -60,22 +45,17 @@ function updateSummary() {
   const avgElem = block1Elem.getElementsByClassName("block-summary-avg")[0];
 
   if (!pointSumBlock1 || !avgElem) {
-    console.error("Summary elements not found");
     return;
   }
 
   const sum = steuerung.getPointSum();
   const avg = steuerung.getPointAvg();
 
-  console.log(`Updating summary: ${sum} points, ${avg.toFixed(1)} average`);
-
   pointSumBlock1.textContent = `${sum} / 600`;
   avgElem.textContent = `${avg.toFixed(1)}`;
 
-  // Block 2 Summary
   const block2Elem = document.getElementById("block2Sum");
   if (!block2Elem) {
-    console.error("block2Sum element not found");
     return;
   }
 
@@ -86,7 +66,6 @@ function updateSummary() {
     block2Elem.getElementsByClassName("block-summary-avg")[0];
 
   if (!pointSumBlock2 || !avgBlock2Elem) {
-    console.error("Block 2 summary elements not found");
     return;
   }
 
@@ -96,7 +75,6 @@ function updateSummary() {
   pointSumBlock2.textContent = `${b2PointSum} / 300`;
   avgBlock2Elem.textContent = `${b2Avg.toFixed(1)}`;
 
-  //Gesamt Summary
   const gesamtElem = document.getElementById("gesamtSum");
   const pointSumGes = gesamtElem.getElementsByClassName(
     "block-summary-points"
@@ -109,36 +87,30 @@ function updateSummary() {
   pointSumGes.textContent = `${gesamtSum} / 900`;
   pointAvgGes.textContent = `${gesamtAvg.toFixed(1)}`;
 
-  // Abi Note
   const abiNoteElem = document.getElementById("abiNote");
 
   abiNoteElem.setAttribute("avg", steuerung.getAbiNote().toFixed(1));
 }
 
-// Edit-Popup öffnen mit Template
 function openEditSubjectModal(index) {
   const fach = steuerung.getFaecher()[index];
   const editSubjectModal = document.getElementById("editSubjectModal");
   editSubjectModal.style.display = "block";
 
-  // Template verwenden
   const template = document.getElementById("editSubjectTemplate");
   editSubjectModal.innerHTML = "";
   editSubjectModal.appendChild(template.content.cloneNode(true));
 
-  // Titel dynamisch setzen
   const titleElem = editSubjectModal.querySelector(".popup-title");
   if (titleElem && fach) {
     titleElem.textContent = `Halbjahresnoten - ${fach.name}`;
   }
 
-  // Gewichtung Switch setzen
   const gewichtungSwitch = editSubjectModal.querySelector("#gewichtungSwitch");
   if (gewichtungSwitch && fach) {
     gewichtungSwitch.checked = fach.gewichtung === 2;
   }
 
-  // Halbjahresnoten dynamisch einfügen
   const halbjahreList = editSubjectModal.querySelector(".halbjahre-list");
   halbjahreList.innerHTML = "";
 
@@ -159,12 +131,10 @@ function openEditSubjectModal(index) {
     halbjahreList.appendChild(card);
   });
 
-  // Event-Listener für Buttons NACH dem Template-Einfügen setzen
   setupEditModalEventListeners(editSubjectModal, fach);
 }
 
 function setupEditModalEventListeners(modal, fach) {
-  // Delete Button
   const deleteBtn = modal.querySelector("#deleteSubjectBtn");
   if (deleteBtn) {
     deleteBtn.onclick = () => {
@@ -180,7 +150,6 @@ function setupEditModalEventListeners(modal, fach) {
     };
   }
 
-  // Save Button
   const saveBtn = modal.querySelector("#closeEditSubjectBtn");
   if (saveBtn) {
     saveBtn.onclick = () => {
@@ -197,7 +166,6 @@ function setupEditModalEventListeners(modal, fach) {
         neueGewichtungen.push(card.getAttribute("gewichtung") || "1");
       });
 
-      // Gewichtung Switch auslesen
       const gewichtungSwitch = modal.querySelector("#gewichtungSwitch");
       const neueGewichtung =
         gewichtungSwitch && gewichtungSwitch.checked ? 2 : 1;
@@ -216,7 +184,6 @@ function setupEditModalEventListeners(modal, fach) {
     };
   }
 
-  // Cancel Button
   const cancelBtn = modal.querySelector("#cancelEditSubjectBtn");
   if (cancelBtn) {
     cancelBtn.onclick = () => {
@@ -274,9 +241,7 @@ function setupAbiListeners() {
   }
 }
 
-// Popup-Setup
 setupAddSubjectPopup(steuerung, update);
 setupAbiListeners();
 
-// Initial update
 update();

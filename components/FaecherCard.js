@@ -36,7 +36,6 @@ class FaecherCard extends HTMLElement {
   }
 
   render() {
-    // Immer 4 Noten anzeigen, fehlende mit "-"
     const noten = [...this.noten];
     const calcNoten = [...this.calcNoten];
     while (noten.length < 4) {
@@ -46,7 +45,6 @@ class FaecherCard extends HTMLElement {
       calcNoten.push("-");
     }
 
-    // Gewichtungen aus LocalStorage holen
     let gewichtungen = [1, 1, 1, 1];
     try {
       const faecher = JSON.parse(localStorage.getItem("faecher")) || [];
@@ -115,7 +113,6 @@ class FaecherCard extends HTMLElement {
     <div class="noten-row">
       ${calcNoten
         .map((note, i) => {
-          // Eine Note ist berechnet, wenn sie vom ursprünglichen "-" durch den Durchschnitt ersetzt wurde
           const isCalculated = noten[i] === "-" && note !== "-";
           return `<button class="note-btn${
             gewichtungen[i] === 0
@@ -136,7 +133,6 @@ class FaecherCard extends HTMLElement {
       btn.addEventListener("click", (e) => {
         e.stopPropagation();
         const idx = parseInt(btn.getAttribute("data-index"), 10);
-        // Fächer aus LocalStorage holen
         const faecher = JSON.parse(localStorage.getItem("faecher")) || [];
         const fach = faecher.find((f) => f.name === this.titel);
         if (fach) {
@@ -145,9 +141,8 @@ class FaecherCard extends HTMLElement {
           fach.gewichtungHalbjahre[idx] =
             fach.gewichtungHalbjahre[idx] === 0 ? 1 : 0;
           localStorage.setItem("faecher", JSON.stringify(faecher));
-          this.render(); // UI aktualisieren
+          this.render();
 
-          // Custom Event für Update senden
           this.dispatchEvent(
             new CustomEvent("gewichtungChanged", {
               bubbles: true,

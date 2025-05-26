@@ -36,7 +36,7 @@ body {
 }
 
 .block-summary-title {
-  font-size: 1.3em; /* Reduziert */
+  font-size: 1.3em;
   font-weight: bold;
   text-decoration: none;
   margin-bottom: 8px;
@@ -44,13 +44,13 @@ body {
 }
 
 .block-summary-avg {
-  font-size: 1.8em; /* Reduziert */
+  font-size: 1.8em;
   font-weight: bold;
   margin-bottom: 6px;
 }
 
 .block-summary-points {
-  font-size: 1em; /* Reduziert */
+  font-size: 1em;
   color: var(--text);
 }
 
@@ -94,29 +94,19 @@ body {
   font-size: 1.1em;
 }
 
-/* Spezifische Breiten für die Spalten */
 .block2-col:nth-child(1) {
-  /* P1, P2, etc. - schmaler */
   flex: 0 0 40px;
   min-width: 40px;
 }
 
 .block2-col:nth-child(2) {
-  /* Fach - am breitesten */
   flex: 2;
   min-width: 120px;
 }
 
 .block2-col:nth-child(3) {
-  /* Note - mittel */
   flex: 0 0 60px;
   min-width: 60px;
-}
-.block2-fach {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  justify-content: center;
 }
 
 .block2-fach-input,
@@ -145,13 +135,6 @@ body {
 
 .block2-note-input {
   font-weight: bold;
-}
-
-/* Remove number input arrows */
-.block2-note-input::-webkit-outer-spin-button,
-.block2-note-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 .block2-note-input[type="number"] {

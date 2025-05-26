@@ -89,13 +89,6 @@ class Steuerung {
     this.speichereFaecher();
   }
 
-  abiHinzufuegen(name, note) {
-    this.abiNamen.push(name);
-    this.abiNoten.push(note);
-    this.speichereAbiNamen();
-    this.speichereAbiNoten();
-  }
-
   getFaecher() {
     return this.faecher;
   }
@@ -106,13 +99,6 @@ class Steuerung {
 
   getAbiNoten() {
     return this.abiNoten;
-  }
-
-  abiEntfernen(index) {
-    this.abiNamen.splice(index, 1);
-    this.abiNoten.splice(index, 1);
-    this.speichereAbiNamen();
-    this.speichereAbiNoten();
   }
 
   fachEntfernen(index) {
@@ -172,7 +158,6 @@ class Steuerung {
 
   getAbiNote() {
     const punkte = this.getAllPointSum();
-    // Tabelle: [ [Note, Mindestpunktzahl], ... ] absteigend sortiert
     const tabelle = [
       [1.0, 823],
       [1.1, 805],
@@ -209,6 +194,6 @@ class Steuerung {
     for (const [note, minPunkte] of tabelle) {
       if (punkte >= minPunkte) return note;
     }
-    return 6.0; // schlechter als 4.0 = nicht bestanden
+    return 6.0;
   }
 }
