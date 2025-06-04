@@ -101,7 +101,7 @@ class FaecherCard extends HTMLElement {
       padding: 0;
     }
 .note-btn.calculated {
-  background: var(--calculated); /* Gedämpftes Grün */
+  background: var(--calculated,rgb(147, 216, 133));
 }
     .note-btn.inactive {
       background: #444;
@@ -113,7 +113,15 @@ class FaecherCard extends HTMLElement {
     <div class="noten-row">
       ${calcNoten
         .map((note, i) => {
-          const isCalculated = noten[i] === "-" && note !== "-";
+          const isCalculated =
+            (noten[i] === undefined ||
+              noten[i] === null ||
+              noten[i] === "" ||
+              noten[i] === "-") &&
+            note !== undefined &&
+            note !== null &&
+            note !== "" &&
+            note !== "-";
           return `<button class="note-btn${
             gewichtungen[i] === 0
               ? " inactive"
