@@ -1,3 +1,4 @@
+/*
 :root {
   --text: #effaef;
   --primarybackground: #292929;
@@ -9,7 +10,7 @@
   --delete: #c0392b;
   --calculated: #66bb6a8a;
 }
-/*
+*/
 :root {
   --text: #effaef;
   --primarybackground: #292929;
@@ -21,4 +22,3 @@
   --delete: #c0392b;
   --calculated: #d885cd8a;
 }
-*/
